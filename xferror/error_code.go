@@ -1,4 +1,4 @@
-package xerror
+package xferror
 
 /*
 ECode
