@@ -1,7 +1,7 @@
-package middleware
+package xfmiddle
 
 import (
-	"github.com/bamboo-services/x-error/xferror"
+	xferror "github.com/bamboo-services/x-error/error"
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
