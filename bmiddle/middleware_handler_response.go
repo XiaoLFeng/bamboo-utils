@@ -1,7 +1,8 @@
-package xfmiddle
+package bmiddle
 
 import (
-	xferror "github.com/bamboo-services/x-error/error"
+	"github.com/bamboo-services/bamboo-utils/bcode"
+	"github.com/bamboo-services/bamboo-utils/berror"
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
@@ -10,20 +11,18 @@ import (
 	"net/http"
 )
 
-/*
-BaseResponse
-
-# 基础响应
-
-基础响应结构体, 用于返回基础响应信息.
-
-# 字段:
-  - output: string, 英文输出
-  - code: int, 状态码
-  - message: string, 中文描述
-  - error_message: string, 错误信息(可选)
-  - data: interface{}, 数据(可选)
-*/
+// BaseResponse
+//
+// # 基本数据返回
+//
+// 基本数据结构，进行数据信息的返回
+//
+// # 参数
+//   - Output 			英文输出(string)
+//   - Code 			状态码(int)
+//   - Message 			中文描述(string)
+//   - ErrorMessage		错误信息(string?)
+//   - Data				数据(interface?)
 type BaseResponse struct {
 	Output       string      `json:"output" dc:"英文输出"`
 	Code         int         `json:"code" dc:"状态码"`
@@ -32,7 +31,15 @@ type BaseResponse struct {
 	Data         interface{} `json:"data,omitempty" dc:"数据"`
 }
 
-func HandlerResponseMiddleware(r *ghttp.Request) {
+// BambooMiddleHandler
+//
+// # 基本数据返回
+//
+// 基本数据信息返回，用于最终的报错或者数据进行编译打包，打包完成后输出 json 参数信息.
+//
+// # 参数
+//   - r		http 信息(*ghttp.Request)
+func BambooMiddleHandler(r *ghttp.Request) {
 	r.Middleware.Next()
 
 	// 自定义缓冲内容，退出默认信息返回
@@ -44,22 +51,22 @@ func HandlerResponseMiddleware(r *ghttp.Request) {
 		msg  string
 		err  = r.GetError()
 		res  = r.GetHandlerResponse()
-		code = xferror.ECode(xferror.Success)
+		code = bcode.BCode(bcode.Success)
 	)
 	if r.GetError() != nil {
 		// 对 GoFrame 默认的报错作处理
 		if gerror.Code(r.GetError()) != gcode.CodeNil {
 			switch gerror.Code(r.GetError()).Code() {
 			case 51:
-				code = xferror.RequestParameterIncorrect
+				code = bcode.RequestParameterIncorrect
 			}
 			msg = r.GetError().Error()
 		} else {
 			// 自定义处理
-			if xferror.GetECode(err) == nil {
-				code = xferror.ServerInternalError
+			if berror.GetECode(err) == nil {
+				code = bcode.ServerInternalError
 			}
-			code = *xferror.GetECode(err)
+			code = *berror.GetECode(err)
 			msg = err.Error()
 		}
 	} else {
@@ -67,16 +74,16 @@ func HandlerResponseMiddleware(r *ghttp.Request) {
 			msg = http.StatusText(r.Response.Status)
 			switch r.Response.Status {
 			case http.StatusNotFound:
-				code = xferror.PageNotFound
+				code = bcode.PageNotFound
 			case http.StatusForbidden:
-				code = xferror.StatusForbidden
+				code = bcode.StatusForbidden
 			default:
-				code = xferror.UnknownError
+				code = bcode.UnknownError
 			}
-			err = xferror.NewError(code, msg)
+			err = berror.NewError(code, msg)
 			r.SetError(err)
 		} else {
-			code = xferror.Success
+			code = bcode.Success
 		}
 	}
 

@@ -1,6 +1,9 @@
-package xferror
+package berror
 
-import "strings"
+import (
+	"github.com/bamboo-services/bamboo-utils/bcode"
+	"strings"
+)
 
 // XError
 //
@@ -8,9 +11,9 @@ import "strings"
 //
 // 用于处理自定义报错的输出内容信息
 type XError struct {
-	error error  // 具体的报错信息
-	text  string // 创建错误时的自定义错误文本，当其代码不为零时可能为空。
-	code  ECode  // 如有必要，请提供错误代码。
+	error error       // 具体的报错信息
+	text  string      // 创建错误时的自定义错误文本，当其代码不为零时可能为空。
+	code  bcode.BCode // 如有必要，请提供错误代码。
 }
 
 // Error - 自定义报错处理
@@ -32,7 +35,7 @@ func (e *XError) Error() string {
 }
 
 // GetECode - 获取详细错误信息
-func GetECode(err error) *ECode {
+func GetECode(err error) *bcode.BCode {
 	if err != nil {
 		if e, ok := err.(IError); ok {
 			return e.getECode()
@@ -45,15 +48,15 @@ func GetECode(err error) *ECode {
 }
 
 // NewError - 创建新的错误
-func NewError(code ECode, text ...string) error {
+func NewError(code bcode.BCode, text ...string) error {
 	return &XError{
 		text: strings.Join(text, ","),
 		code: code,
 	}
 }
 
-// NewErrorHasError - 创建新的错误并且携带 error 信息
-func NewErrorHasError(code ECode, errorData error, text ...string) error {
+// NewErrorHasError - 创建新的错误并且携带 berror 信息
+func NewErrorHasError(code bcode.BCode, errorData error, text ...string) error {
 	return &XError{
 		error: errorData,
 		text:  strings.Join(text, ","),

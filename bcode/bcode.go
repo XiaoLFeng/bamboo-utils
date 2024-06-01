@@ -1,18 +1,18 @@
-package xferror
+package bcode
 
-/*
-ECode
+import "github.com/gogf/gf/v2/errors/gcode"
 
-# 错误码接口
-
-错误码接口, 用于返回错误码信息.
-
-# 方法:
-  - Code: int, 错误码
-  - Message: string, 错误信息
-  - Data: interface{}, 数据
-*/
-type ECode interface {
+// BCode
+//
+// # 错误码接口
+//
+// 错误码接口, 用于返回错误码信息.
+//
+// # 方法:
+//   - Code		错误码(int)
+//   - Message		错误信息(string)
+//   - Output		报错英文规范说明(string)
+type BCode interface {
 	// Code - 返回一个错误码的具体信息
 	Code() int
 	// Message - 返回错误码所对应的中文解释大致错误
@@ -39,6 +39,34 @@ var (
 	OperationFailed           = LocalCode{output: "OperationFailed", code: 115, message: "操作失败"}
 )
 
-func BaseLocalCode(output string, code int, message string) ECode {
+// BaseLocalCode
+//
+// # 基础错误码
+//
+// 用于创建一个基础的错误码, 用于返回错误码信息.
+//
+// # 参数
+//   - output		报错英文规范说明(string)
+//   - code		错误码(int)
+//   - message		错误信息(string)
+//
+// # 返回
+//   - BCode		本地错误码
+func BaseLocalCode(output string, code int, message string) BCode {
 	return LocalCode{output: output, code: code, message: message}
+}
+
+// GcodeToLocalCode
+//
+// # Gcode转换为本地错误码
+//
+// 用于将gcode转换为本地错误码, 用于返回错误码信息. Gcode 为 gogf/gf/v2/errors/gcode 包中的错误码.
+//
+// # 参数
+//   - gcode		gcode错误码
+//
+// # 返回
+//   - BCode		本地错误码
+func GcodeToLocalCode(gcode gcode.Code) BCode {
+	return BaseLocalCode("GCodeError", gcode.Code(), gcode.Message())
 }
