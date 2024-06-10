@@ -9,6 +9,7 @@ import (
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"math/big"
+	"strings"
 )
 
 // GenerateRandUUID
@@ -52,7 +53,7 @@ func MakeUUIDByString(getString string) (getUUID uuid.UUID) {
 // # 返回:
 //   - string 	去除 "Bearer " 前缀后的 Token
 func TokenRemoveBearer(getToken string) string {
-	return getToken[7:]
+	return strings.Replace(getToken, "Bearer ", "", 1)
 }
 
 // PasswordEncode
