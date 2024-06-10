@@ -27,16 +27,22 @@ type BCode interface {
 // ==================================================
 
 var (
-	Success                   = LocalCode{output: "Success", code: 100, message: "操作成功"}
+	Success                   = LocalCode{output: "Success", code: 200, message: "操作成功"}
 	ServerInternalError       = LocalCode{output: "ServerInternalError", code: 101, message: "服务器内部错误"}
 	RequestParameterIncorrect = LocalCode{output: "RequestParameterIncorrect", code: 103, message: "请求参数不正确"}
-	UnknownError              = LocalCode{output: "UnknownError", code: 102, message: "未知错误"}
-	PageNotFound              = LocalCode{output: "PageNotFound", code: 110, message: "页面不存在"}
-	StatusForbidden           = LocalCode{output: "StatusForbidden", code: 111, message: "禁止访问"}
-	AlreadyExists             = LocalCode{output: "AlreadyExists", code: 112, message: "内容已存在"}
-	NotExist                  = LocalCode{output: "NotExist", code: 113, message: "内容不存在"}
-	Expired                   = LocalCode{output: "Expired", code: 114, message: "内容已过期"}
-	OperationFailed           = LocalCode{output: "OperationFailed", code: 115, message: "操作失败"}
+	RequestBodyIncorrect      = LocalCode{output: "RequestBodyIncorrect", code: 104, message: "请求体内容不正确"}
+	RequestPathIncorrect      = LocalCode{output: "RequestPathIncorrect", code: 105, message: "请求路径不正确"}
+	RequestHeaderIncorrect    = LocalCode{output: "RequestHeaderIncorrect", code: 106, message: "请求头不正确"}
+	RequestMethodIncorrect    = LocalCode{output: "RequestMethodIncorrect", code: 107, message: "请求方法不正确"}
+	RequestContentTypeError   = LocalCode{output: "RequestContentTypeError", code: 108, message: "请求内容类型错误"}
+	RequestContentLengthError = LocalCode{output: "RequestContentLengthError", code: 109, message: "请求内容长度错误"}
+	UnknownError              = LocalCode{output: "UnknownError", code: 110, message: "未知错误"}
+	PageNotFound              = LocalCode{output: "PageNotFound", code: 111, message: "页面不存在"}
+	StatusForbidden           = LocalCode{output: "StatusForbidden", code: 112, message: "禁止访问"}
+	AlreadyExists             = LocalCode{output: "AlreadyExists", code: 113, message: "内容已存在"}
+	NotExist                  = LocalCode{output: "NotExist", code: 114, message: "内容不存在"}
+	Expired                   = LocalCode{output: "Expired", code: 115, message: "内容已过期"}
+	OperationFailed           = LocalCode{output: "OperationFailed", code: 116, message: "操作失败"}
 )
 
 // BaseLocalCode
