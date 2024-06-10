@@ -1,6 +1,8 @@
 package bcode
 
-import "github.com/gogf/gf/v2/errors/gcode"
+import (
+	"github.com/gogf/gf/v2/errors/gcode"
+)
 
 // BCode
 //
