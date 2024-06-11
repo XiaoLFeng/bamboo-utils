@@ -45,6 +45,18 @@ var (
 	NotExist                  = LocalCode{output: "NotExist", code: 114, message: "内容不存在"}
 	Expired                   = LocalCode{output: "Expired", code: 115, message: "内容已过期"}
 	OperationFailed           = LocalCode{output: "OperationFailed", code: 116, message: "操作失败"}
+	OperationTimeout          = LocalCode{output: "OperationTimeout", code: 117, message: "操作超时"}
+	OperationLimit            = LocalCode{output: "OperationLimit", code: 118, message: "操作限制"}
+	OperationNotSupport       = LocalCode{output: "OperationNotSupport", code: 119, message: "操作不支持"}
+	OperationNotAllow         = LocalCode{output: "OperationNotAllow", code: 120, message: "操作不允许"}
+	OperationNotImplement     = LocalCode{output: "OperationNotImplement", code: 121, message: "操作未实现"}
+	OperationNotPermission    = LocalCode{output: "OperationNotPermission", code: 122, message: "操作无权限"}
+	OperationNotAvailable     = LocalCode{output: "OperationNotAvailable", code: 123, message: "操作不可用"}
+	VerifyFailed              = LocalCode{output: "VerifyFailed", code: 124, message: "验证失败"}
+	VerifyTimeout             = LocalCode{output: "VerifyTimeout", code: 125, message: "验证超时"}
+	VerifyLimit               = LocalCode{output: "VerifyLimit", code: 126, message: "验证限制"}
+	VerifyNotSupport          = LocalCode{output: "VerifyNotSupport", code: 127, message: "验证不支持"}
+	VerifyNotAllow            = LocalCode{output: "VerifyNotAllow", code: 128, message: "验证不允许"}
 )
 
 // BaseLocalCode

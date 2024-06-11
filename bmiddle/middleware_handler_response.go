@@ -21,7 +21,9 @@ import (
 // # 参数
 //   - r		http 信息(*ghttp.Request)
 func BambooMiddleHandler(r *ghttp.Request) {
-	r.Middleware.Next()
+	if r.GetError() == nil {
+		r.Middleware.Next()
+	}
 
 	// 自定义缓冲内容，退出默认信息返回
 	if r.Response.BufferLength() > 0 {
