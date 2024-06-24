@@ -57,6 +57,11 @@ var (
 	VerifyLimit               = LocalCode{output: "VerifyLimit", code: 126, message: "验证限制"}
 	VerifyNotSupport          = LocalCode{output: "VerifyNotSupport", code: 127, message: "验证不支持"}
 	VerifyNotAllow            = LocalCode{output: "VerifyNotAllow", code: 128, message: "验证不允许"}
+	Unauthenticated           = LocalCode{output: "Unauthenticated", code: 129, message: "未认证"}
+	Unauthorized              = LocalCode{output: "Unauthorized", code: 130, message: "未授权"}
+	Forbidden                 = LocalCode{output: "Forbidden", code: 131, message: "禁止访问"}
+	NotFound                  = LocalCode{output: "NotFound", code: 132, message: "未找到"}
+	Conflict                  = LocalCode{output: "Conflict", code: 133, message: "冲突"}
 )
 
 // BaseLocalCode
