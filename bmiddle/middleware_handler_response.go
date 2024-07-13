@@ -87,8 +87,8 @@ func BambooMiddleHandler(r *ghttp.Request) {
 		})
 	}
 	if msg != "" {
-		glog.Noticef(r.Context(), "[RESPONSE] <%d>%s %s - %s", code.Code(), code.Output(), code.Message(), msg)
+		glog.Noticef(r.Context(), "[RESP] <%d>%s %s - %s", code.Code(), code.Output(), code.Message(), msg)
 	} else {
-		glog.Noticef(r.Context(), "[RESPONSE] <%d>%s %s", code.Code(), code.Output(), code.Message())
+		glog.Noticef(r.Context(), "[RESP] <%d>%s %s", code.Code(), code.Output(), code.Message())
 	}
 }
