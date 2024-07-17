@@ -38,7 +38,8 @@ func GenerateRandUUID() (getUUID uuid.UUID) {
 // # 返回:
 //   - getUUID 	生成的 UUID(uuid.UUID)
 func MakeUUIDByString(getString string) (getUUID uuid.UUID) {
-	return md5.Sum([]byte(getString))
+	parse, _ := uuid.Parse(getString)
+	return parse
 }
 
 // TokenRemoveBearer
