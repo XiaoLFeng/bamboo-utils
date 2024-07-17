@@ -38,6 +38,22 @@ func GenerateRandUUID() (getUUID uuid.UUID) {
 // # 返回:
 //   - getUUID 	生成的 UUID(uuid.UUID)
 func MakeUUIDByString(getString string) (getUUID uuid.UUID) {
+	return md5.Sum([]byte(getString))
+}
+
+// StringToUUID
+//
+// # 字符串转UUID
+//
+// 用于将字符串转换为 UUID，返回转换后的 UUID. 转换后的 UUID 为 uuid.UUID 类型.
+// 将字符串 UUID 转换为 UUID 类型.
+//
+// # 参数:
+//   - getString 	传入的字符串(string)
+//
+// # 返回:
+//   - getUUID 	转换后的 UUID(uuid.UUID)
+func StringToUUID(getString string) (getUUID uuid.UUID) {
 	parse, _ := uuid.Parse(getString)
 	return parse
 }
