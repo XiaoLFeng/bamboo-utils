@@ -8,26 +8,26 @@
  * ***********************************************************
  */
 
-package bmiddle
+package bhook
 
 import (
+	"github.com/bamboo-services/bamboo-utils/blog"
 	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
-	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// BambooMiddleRequestCheck
+// BambooHookRequestInfo 记录并解析 HTTP 请求的详细信息，包括请求方法、路径、参数、头部等内容，并统计请求耗时。
 //
-// # 中间件请求处理
+// 该钩子函数在请求处理之前被调用，用于记录并解析 HTTP 请求的详细信息，包括请求方法、路径、参数、头部等内容，并统计请求耗时。
 //
-// 中间件请求处理，用于处理请求的中间件；主要用于获取请求中的参数信息；用于测试以及调试；
+// 参数：
+//   - r：ghttp.Request 对象，表示当前 HTTP 请求。
 //
-// # 参数
-//   - r		请求对象(*ghttp.Request)
-func BambooMiddleRequestCheck(r *ghttp.Request) {
+// 返回值：无
+func BambooHookRequestInfo(r *ghttp.Request) {
 	// 获取请求的参数
-	g.Log().Noticef(r.Context(), "[REQU] 请求信息：[%s] %s", r.Method, r.URL.Path)
+	blog.BambooInfo(r.Context(), "REQU", "请求信息：[%s] %s", r.Method, r.URL.Path)
 	if len(r.GetBody()) > 0 {
 		g.Log().Infof(r.Context(), "\t[BODY]请求体参数:")
 		// 解析请求体参数
@@ -49,10 +49,5 @@ func BambooMiddleRequestCheck(r *ghttp.Request) {
 		}
 	}
 
-	startTime := gtime.Now().UnixMilli()
 	r.Middleware.Next()
-	endTime := gtime.Now().UnixMilli()
-
-	// 请求时间统计
-	g.Log().Noticef(r.Context(), "[TIME] 请求耗时：%d ms", endTime-startTime)
 }
