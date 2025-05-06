@@ -48,6 +48,4 @@ func BambooHookRequestInfo(r *ghttp.Request) {
 			g.Log().Debugf(r.Context(), "\t\t[%v] \t%v", key, value)
 		}
 	}
-
-	r.Middleware.Next()
 }
