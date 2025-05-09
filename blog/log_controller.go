@@ -23,10 +23,10 @@ import (
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的消息内容。
-func ControllerInfo(ctx context.Context, function string, message string) {
+func ControllerInfo(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message, v...))
 }
 
 // ControllerDebug 输出控制器相关的调试日志。
@@ -35,10 +35,10 @@ func ControllerInfo(ctx context.Context, function string, message string) {
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的消息内容。
-func ControllerDebug(ctx context.Context, function string, message string) {
+func ControllerDebug(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message, v...))
 }
 
 // ControllerError 输出控制器相关的错误日志。
@@ -47,10 +47,10 @@ func ControllerDebug(ctx context.Context, function string, message string) {
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的错误消息内容。
-func ControllerError(ctx context.Context, function string, message string) {
+func ControllerError(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message, v...))
 }
 
 // ControllerPanic 输出控制器相关的严重错误日志并触发panic。
@@ -59,8 +59,8 @@ func ControllerError(ctx context.Context, function string, message string) {
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的严重错误消息内容。
-func ControllerPanic(ctx context.Context, function string, message string) {
+func ControllerPanic(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message, v...))
 }

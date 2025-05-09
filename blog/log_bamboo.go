@@ -26,7 +26,7 @@ import (
 func BambooInfo(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message), v)
+	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message, v))
 }
 
 // BambooDebug 输出工具相关的调试日志。
@@ -38,7 +38,7 @@ func BambooInfo(ctx context.Context, function string, message string, v ...inter
 func BambooDebug(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message), v)
+	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message, v))
 }
 
 // BambooError 输出工具相关的错误日志。
@@ -50,7 +50,7 @@ func BambooDebug(ctx context.Context, function string, message string, v ...inte
 func BambooError(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message), v)
+	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message, v))
 }
 
 // BambooPanic 输出工具相关的严重错误日志并触发panic。
@@ -62,5 +62,5 @@ func BambooError(ctx context.Context, function string, message string, v ...inte
 func BambooPanic(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message), v)
+	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message, v))
 }

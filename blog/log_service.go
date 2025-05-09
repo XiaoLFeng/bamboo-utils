@@ -26,7 +26,7 @@ import (
 func ServiceInfo(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.SERVICE)
-	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message), v)
+	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message, v...))
 }
 
 // ServiceDebug 输出服务层相关的调试日志。
@@ -35,10 +35,10 @@ func ServiceInfo(ctx context.Context, function string, message string, v ...inte
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的消息内容。
-func ServiceDebug(ctx context.Context, function string, message string) {
+func ServiceDebug(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.SERVICE)
-	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message, v...))
 }
 
 // ServiceError 输出服务层相关的错误日志。
@@ -47,10 +47,10 @@ func ServiceDebug(ctx context.Context, function string, message string) {
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的错误消息内容。
-func ServiceError(ctx context.Context, function string, message string) {
+func ServiceError(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.SERVICE)
-	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message, v...))
 }
 
 // ServicePanic 输出服务层相关的严重错误日志并触发panic。
@@ -59,8 +59,8 @@ func ServiceError(ctx context.Context, function string, message string) {
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的严重错误消息内容。
-func ServicePanic(ctx context.Context, function string, message string) {
+func ServicePanic(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.SERVICE)
-	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message, v...))
 }

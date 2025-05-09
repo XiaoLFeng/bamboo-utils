@@ -23,10 +23,10 @@ import (
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的消息内容。
-func DaoInfo(ctx context.Context, function string, message string) {
+func DaoInfo(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.DAO)
-	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message, v...))
 }
 
 // DaoDebug 输出数据访问层相关的调试日志。
@@ -35,10 +35,10 @@ func DaoInfo(ctx context.Context, function string, message string) {
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的消息内容。
-func DaoDebug(ctx context.Context, function string, message string) {
+func DaoDebug(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.DAO)
-	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message, v...))
 }
 
 // DaoError 输出数据访问层相关的错误日志。
@@ -47,10 +47,10 @@ func DaoDebug(ctx context.Context, function string, message string) {
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的错误消息内容。
-func DaoError(ctx context.Context, function string, message string) {
+func DaoError(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.DAO)
-	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message, v...))
 }
 
 // DaoPanic 输出数据访问层相关的严重错误日志并触发panic。
@@ -59,8 +59,8 @@ func DaoError(ctx context.Context, function string, message string) {
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
 //   - message: 要记录的严重错误消息内容。
-func DaoPanic(ctx context.Context, function string, message string) {
+func DaoPanic(ctx context.Context, function string, message string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.DAO)
-	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message))
+	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message, v...))
 }

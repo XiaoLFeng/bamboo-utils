@@ -10,7 +10,10 @@
 
 package blog
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 // stringBuild 构建格式化的日志消息字符串。
 //
@@ -20,11 +23,11 @@ import "strings"
 //
 // 返回:
 //   - 拼接后的字符串，包含控制器、功能名及消息内容
-func stringBuild(stringBuilder *strings.Builder, function string, message string) string {
+func stringBuild(stringBuilder *strings.Builder, function string, message string, v ...interface{}) string {
 	stringBuilder.WriteString(" ")
 	stringBuilder.WriteString("<")
 	stringBuilder.WriteString(function)
 	stringBuilder.WriteString("> ")
-	stringBuilder.WriteString(message)
-	return stringBuilder.String()
+	stringBuilder.WriteString(fmt.Sprintf(message, v...))
+	return fmt.Sprintf(stringBuilder.String())
 }
