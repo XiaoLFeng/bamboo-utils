@@ -2,9 +2,9 @@ package bmiddle
 
 import (
 	"errors"
-	"github.com/bamboo-services/bamboo-utils/berror"
-	"github.com/bamboo-services/bamboo-utils/bmodels"
-	"github.com/bamboo-services/bamboo-utils/butil"
+	"github.com/XiaoLFeng/bamboo-utils/berror"
+	"github.com/XiaoLFeng/bamboo-utils/bmodels"
+	"github.com/XiaoLFeng/bamboo-utils/butil"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gctx"

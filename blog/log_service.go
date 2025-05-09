@@ -12,7 +12,7 @@ package blog
 
 import (
 	"context"
-	"github.com/bamboo-services/bamboo-utils/bconsts"
+	"github.com/XiaoLFeng/bamboo-utils/bconsts"
 	"github.com/gogf/gf/v2/frame/g"
 	"strings"
 )
