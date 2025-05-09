@@ -47,10 +47,10 @@ func BambooHandlerResponse(r *ghttp.Request) {
 			// 否则使用未定义错误【开发者错误报错】
 			errorCode = berror.ErrDeveloperError
 		}
-		if errorCode.GetErrorCode().Code > 999 {
-			r.Response.Status = int(errorCode.GetErrorCode().Code / 10)
-		} else if errorCode.GetErrorCode().Code > 9999 {
+		if errorCode.GetErrorCode().Code > 9999 {
 			r.Response.Status = int(errorCode.GetErrorCode().Code / 100)
+		} else if errorCode.GetErrorCode().Code > 999 {
+			r.Response.Status = int(errorCode.GetErrorCode().Code / 10)
 		} else {
 			r.Response.Status = int(errorCode.GetErrorCode().Code)
 		}
