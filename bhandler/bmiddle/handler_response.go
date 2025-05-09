@@ -47,7 +47,13 @@ func BambooHandlerResponse(r *ghttp.Request) {
 			// 否则使用未定义错误【开发者错误报错】
 			errorCode = berror.ErrDeveloperError
 		}
-		r.Response.Status = int(customErr.GetErrorCode().Code / 100)
+		if customErr.GetErrorCode().Code > 999 {
+			r.Response.Status = int(customErr.GetErrorCode().Code / 10)
+		} else if customErr.GetErrorCode().Code > 9999 {
+			r.Response.Status = int(customErr.GetErrorCode().Code / 100)
+		} else {
+			r.Response.Status = int(customErr.GetErrorCode().Code)
+		}
 	} else {
 		if r.Response.Status > 0 && r.Response.Status != http.StatusOK {
 			errorCode = berror.ErrUndefinitionError
