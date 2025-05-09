@@ -14,6 +14,7 @@ import (
 	"github.com/XiaoLFeng/bamboo-utils/berror"
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/util/gvalid"
 )
 
 // GErrorTransform 将 gerror 错误对象转换为 berror 错误码。
@@ -84,4 +85,27 @@ func GErrorTransform(errCode *gerror.Error) berror.ErrorCode {
 		// 这也包括 err.Code() 返回 nil 的情况 (已在函数开始处处理)
 		return berror.ErrUndefinitionError
 	}
+}
+
+// GValidTransform 将 gvalid 错误转换为 berror 错误码结构体。
+//
+// 参数:
+//   - gval: gvalid 错误实例
+//
+// 返回:
+//   - 转换后的 berror.ErrorCode 错误码结构体，包含验证失败的具体信息
+//
+// 错误:
+//   - 如果 gvalid 错误无效规则或无具体信息，会返回未知错误类型和消息。
+func GValidTransform(gval gvalid.Error) berror.ErrorCode {
+	firstRule, err := gval.FirstRule()
+	responseData := make(map[string]string)
+	if err != nil {
+		responseData["type"] = firstRule
+		responseData["message"] = err.Error()
+	} else {
+		responseData["type"] = firstRule
+		responseData["message"] = "未知错误"
+	}
+	return *berror.ErrorAddData(berror.ErrInputValidationFailed, responseData)
 }

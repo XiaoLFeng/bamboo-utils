@@ -12,6 +12,7 @@ import (
 	"github.com/gogf/gf/v2/os/gctx"
 	"github.com/gogf/gf/v2/os/glog"
 	"github.com/gogf/gf/v2/os/gtime"
+	"github.com/gogf/gf/v2/util/gvalid"
 	"go/types"
 	"net/http"
 )
@@ -46,14 +47,19 @@ func BambooHandlerResponse(r *ghttp.Request) {
 			// 自定义错误码
 			errorCode = customErr.GetErrorCode()
 		} else {
+			g.Log().Debugf(r.GetCtx(), "错误类型: %T, 具体错误: %v", r.GetError(), r.GetError())
 			// 检查是否是原生 GoFrame 错误
-			var normalError *gerror.Error
-			if errors.As(r.GetError(), &normalError) {
-				errorCode = private.GErrorTransform(normalError)
+			var gerr *gerror.Error
+			var gval gvalid.Error
+			if errors.As(r.GetError(), &gerr) {
+				errorCode = private.GErrorTransform(gerr)
+			} else if errors.As(r.GetError(), &gval) {
+				errorCode = private.GValidTransform(gval)
 			} else {
 				errorCode = berror.ErrDeveloperError
 			}
 		}
+
 		if errorCode.GetErrorCode().Code > 9999 {
 			r.Response.Status = int(errorCode.GetErrorCode().Code / 100)
 		} else if errorCode.GetErrorCode().Code > 999 {
@@ -61,16 +67,18 @@ func BambooHandlerResponse(r *ghttp.Request) {
 		} else {
 			r.Response.Status = int(errorCode.GetErrorCode().Code)
 		}
-		returnResult := bmodels.ResponseDTO[types.Nil]{
+		returnResult := bmodels.ResponseDTO[interface{}]{
 			Context: gctx.CtxId(r.GetCtx()),
 			Time:    gtime.TimestampMilli(),
 			Code:    errorCode.Code,
 			Message: errorCode.Message,
+			Data:    errorCode.Data,
 		}
 		if g.Log().GetLevel() == glog.LEVEL_DEV {
 			returnResult.Overhead = butil.Ptr(gtime.Now().Sub(r.EnterTime).Milliseconds())
 		}
 		r.Response.WriteJson(returnResult)
+		return
 	} else {
 		if r.Response.Status > 0 && r.Response.Status != http.StatusOK {
 			errorCode = berror.ErrUndefinitionError

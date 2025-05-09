@@ -21,9 +21,10 @@ var (
 	ErrInvalidParameters        = ErrorCode{Code: 40002, Message: "无效的参数"}
 	ErrMissingParameters        = ErrorCode{Code: 40003, Message: "缺少必要参数"}
 	ErrInvalidFormat            = ErrorCode{Code: 40004, Message: "格式无效"}
-	ErrValidationFailed         = ErrorCode{Code: 40005, Message: "验证失败"}   // 对应 gerror.CodeValidationFailed (51)
-	ErrInvalidOperation         = ErrorCode{Code: 40006, Message: "无效操作"}   // 新增, 对应 gerror.CodeInvalidOperation (55)
-	ErrBusinessValidationFailed = ErrorCode{Code: 40007, Message: "业务校验失败"} // 新增, 对应 gerror.CodeBusinessValidationFailed (300)
+	ErrValidationFailed         = ErrorCode{Code: 40005, Message: "验证失败"}     // 对应 gerror.CodeValidationFailed (51)
+	ErrInvalidOperation         = ErrorCode{Code: 40006, Message: "无效操作"}     // 新增, 对应 gerror.CodeInvalidOperation (55)
+	ErrInputValidationFailed    = ErrorCode{Code: 40007, Message: "输入数据验证失败"} // 新增, 用于输入数据的验证失败
+	ErrBusinessValidationFailed = ErrorCode{Code: 40008, Message: "业务校验失败"}   // 新增, 对应 gerror.CodeBusinessValidationFailed (300)
 
 	//
 	// 401 Unauthorized errors (40101-40199)
