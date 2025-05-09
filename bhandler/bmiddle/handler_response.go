@@ -5,6 +5,8 @@ import (
 	"github.com/XiaoLFeng/bamboo-utils/berror"
 	"github.com/XiaoLFeng/bamboo-utils/bmodels"
 	"github.com/XiaoLFeng/bamboo-utils/butil"
+	"github.com/XiaoLFeng/bamboo-utils/butil/private"
+	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gctx"
@@ -44,8 +46,13 @@ func BambooHandlerResponse(r *ghttp.Request) {
 			// 自定义错误码
 			errorCode = customErr.GetErrorCode()
 		} else {
-			// 否则使用未定义错误【开发者错误报错】
-			errorCode = berror.ErrDeveloperError
+			// 检查是否是原生 GoFrame 错误
+			var normalError *gerror.Error
+			if errors.As(r.GetError(), &normalError) {
+				errorCode = private.GErrorTransform(normalError)
+			} else {
+				errorCode = berror.ErrDeveloperError
+			}
 		}
 		if errorCode.GetErrorCode().Code > 9999 {
 			r.Response.Status = int(errorCode.GetErrorCode().Code / 100)
@@ -54,6 +61,16 @@ func BambooHandlerResponse(r *ghttp.Request) {
 		} else {
 			r.Response.Status = int(errorCode.GetErrorCode().Code)
 		}
+		returnResult := bmodels.ResponseDTO[types.Nil]{
+			Context: gctx.CtxId(r.GetCtx()),
+			Time:    gtime.TimestampMilli(),
+			Code:    errorCode.Code,
+			Message: errorCode.Message,
+		}
+		if g.Log().GetLevel() == glog.LEVEL_DEV {
+			returnResult.Overhead = butil.Ptr(gtime.Now().Sub(r.EnterTime).Milliseconds())
+		}
+		r.Response.WriteJson(returnResult)
 	} else {
 		if r.Response.Status > 0 && r.Response.Status != http.StatusOK {
 			errorCode = berror.ErrUndefinitionError
