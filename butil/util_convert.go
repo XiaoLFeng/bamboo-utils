@@ -48,6 +48,7 @@ func MapToStruct[E interface{}](value map[string]interface{}, target E) (E, erro
 			value[k] = nil
 		}
 	}
-	err := gconv.Struct(value, target)
-	return target, err
+	var newTarget E
+	err := gconv.Struct(value, &newTarget)
+	return newTarget, err
 }
