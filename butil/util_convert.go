@@ -10,7 +10,9 @@
 
 package butil
 
-import "github.com/gogf/gf/v2/util/gconv"
+import (
+	"github.com/gogf/gf/v2/util/gconv"
+)
 
 // StructToMap 将结构体转换为 `map[string]interface{}`
 //
@@ -29,4 +31,23 @@ func StructToMap(v interface{}) map[string]interface{} {
 		}
 	}
 	return getMap
+}
+
+// MapToStruct 将 map 数据转换为指定结构体类型。
+//
+// 参数:
+//   - value: 包含数据的 map[string]interface{}
+//   - target: 要填充的目标结构体实例
+//
+// 返回:
+//   - 填充后的目标结构体实例
+//   - 转换过程中可能产生的错误
+func MapToStruct[E interface{}](value map[string]interface{}, target E) (E, error) {
+	for k, v := range value {
+		if v == "null" {
+			value[k] = nil
+		}
+	}
+	err := gconv.Struct(value, target)
+	return target, err
 }
