@@ -43,9 +43,9 @@ func SuccessHasData[T interface{}](ctx context.Context, message string, data *T)
 //   - message: 响应的消息内容。
 //
 // 返回:
-//   - dto.ResponseDTO[types.Nil]: 包含状态码 200 和消息的响应对象。
-func Success(ctx context.Context, message string) *bmodels.ResponseDTO[types.Nil] {
-	returnResult := bmodels.ResponseDTO[types.Nil]{
+//   - dto.ResponseDTO[*types.Nil]: 包含状态码 200 和消息的响应对象。
+func Success(ctx context.Context, message string) *bmodels.ResponseDTO[*types.Nil] {
+	returnResult := bmodels.ResponseDTO[*types.Nil]{
 		Context: gctx.CtxId(ctx),
 		Code:    200,
 		Time:    gtime.TimestampMilli(),
