@@ -36,7 +36,7 @@ func GErrorTransform(errCode *gerror.Error) berror.ErrorCode {
 	case gcode.CodeInternalError:
 		return berror.ErrInternalServer
 	case gcode.CodeValidationFailed:
-		return *berror.ErrorAddData(berror.ErrValidationFailed, errCode.Error())
+		return *berror.ErrorAddData(&berror.ErrValidationFailed, errCode.Error())
 	case gcode.CodeDbOperationError:
 		return berror.ErrDatabaseError
 	case gcode.CodeInvalidParameter:
@@ -107,5 +107,5 @@ func GValidTransform(gval gvalid.Error) berror.ErrorCode {
 		responseData["type"] = firstRule
 		responseData["message"] = "未知错误"
 	}
-	return *berror.ErrorAddData(berror.ErrInputValidationFailed, responseData)
+	return *berror.ErrorAddData(&berror.ErrInputValidationFailed, responseData)
 }

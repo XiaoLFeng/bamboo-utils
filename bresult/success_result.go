@@ -21,7 +21,7 @@ import (
 //
 // 返回:
 //   - 包含状态码、描述信息及数据的通用响应结构体。
-func SuccessHasData[T interface{}](ctx context.Context, message string, data T) *bmodels.ResponseDTO[T] {
+func SuccessHasData[T interface{}](ctx context.Context, message string, data *T) *bmodels.ResponseDTO[T] {
 	returnResult := bmodels.ResponseDTO[T]{
 		Context: gctx.CtxId(ctx),
 		Code:    200,

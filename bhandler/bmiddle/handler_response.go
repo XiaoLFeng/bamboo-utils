@@ -72,7 +72,7 @@ func BambooHandlerResponse(r *ghttp.Request) {
 			Time:    gtime.TimestampMilli(),
 			Code:    errorCode.Code,
 			Message: errorCode.Message,
-			Data:    errorCode.Data,
+			Data:    &errorCode.Data,
 		}
 		if g.Log().GetLevel() == glog.LEVEL_DEV {
 			returnResult.Overhead = butil.Ptr(gtime.Now().Sub(r.EnterTime).Milliseconds())

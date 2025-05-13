@@ -115,7 +115,7 @@ func NewErrorCode(code uint, message string, data interface{}) *ErrorCode {
 //
 // 返回:
 //   - 包含新增数据的错误码结构体
-func ErrorAddData(err ErrorCode, data interface{}) *ErrorCode {
+func ErrorAddData(err *ErrorCode, data interface{}) *ErrorCode {
 	err.Data = data
-	return &err
+	return err
 }

@@ -22,11 +22,12 @@ import (
 // 参数:
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
-//   - message: 要记录的消息内容。
-func ControllerInfo(ctx context.Context, function string, message string, v ...interface{}) {
+//   - format: 要记录的消息内容。
+//   - v: 可选的参数列表，用于格式化消息内容。
+func ControllerInfo(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message, v...))
+	g.Log().Info(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // ControllerDebug 输出控制器相关的调试日志。
@@ -34,11 +35,12 @@ func ControllerInfo(ctx context.Context, function string, message string, v ...i
 // 参数:
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
-//   - message: 要记录的消息内容。
-func ControllerDebug(ctx context.Context, function string, message string, v ...interface{}) {
+//   - format: 要记录的消息内容。
+//   - v: 可选的参数列表，用于格式化消息内容。
+func ControllerDebug(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message, v...))
+	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // ControllerError 输出控制器相关的错误日志。
@@ -46,11 +48,25 @@ func ControllerDebug(ctx context.Context, function string, message string, v ...
 // 参数:
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
-//   - message: 要记录的错误消息内容。
-func ControllerError(ctx context.Context, function string, message string, v ...interface{}) {
+//   - format: 要记录的错误消息内容。
+//   - v: 可选的参数列表，用于格式化错误消息内容。
+func ControllerError(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message, v...))
+	g.Log().Error(ctx, stringBuild(&stringBuilder, function, format, v...))
+}
+
+// ControllerNotice 记录控制器级别的通知日志。
+//
+// 参数:
+//   - ctx: 上下文对象
+//   - function: 功能标识，用于指定日志来源
+//   - format: 日志消息的格式字符串
+//   - v: 可变参数，用于格式化日志消息
+func ControllerNotice(ctx context.Context, function string, format string, v ...interface{}) {
+	var stringBuilder strings.Builder
+	stringBuilder.WriteString(bconsts.CONTROLLER)
+	g.Log().Notice(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // ControllerPanic 输出控制器相关的严重错误日志并触发panic。
@@ -58,9 +74,10 @@ func ControllerError(ctx context.Context, function string, message string, v ...
 // 参数:
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
-//   - message: 要记录的严重错误消息内容。
-func ControllerPanic(ctx context.Context, function string, message string, v ...interface{}) {
+//   - format: 要记录的严重错误消息内容。
+//   - v: 可选的参数列表，用于格式化严重错误消息内容。
+func ControllerPanic(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message, v...))
+	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, format, v...))
 }

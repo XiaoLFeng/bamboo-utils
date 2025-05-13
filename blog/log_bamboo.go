@@ -22,11 +22,12 @@ import (
 // 参数:
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
-//   - message: 要记录的消息内容。
-func BambooInfo(ctx context.Context, function string, message string, v ...interface{}) {
+//   - format: 要记录的消息内容。
+//   - v: 可选参数，用于格式化消息内容。
+func BambooInfo(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Info(ctx, stringBuild(&stringBuilder, function, message, v))
+	g.Log().Info(ctx, stringBuild(&stringBuilder, function, format, v))
 }
 
 // BambooDebug 输出工具相关的调试日志。
@@ -34,11 +35,12 @@ func BambooInfo(ctx context.Context, function string, message string, v ...inter
 // 参数:
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
-//   - message: 要记录的消息内容。
-func BambooDebug(ctx context.Context, function string, message string, v ...interface{}) {
+//   - format: 要记录的消息内容。
+//   - v: 可选参数，用于格式化消息内容。
+func BambooDebug(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, message, v))
+	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, format, v))
 }
 
 // BambooError 输出工具相关的错误日志。
@@ -46,11 +48,25 @@ func BambooDebug(ctx context.Context, function string, message string, v ...inte
 // 参数:
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
-//   - message: 要记录的错误消息内容。
-func BambooError(ctx context.Context, function string, message string, v ...interface{}) {
+//   - format: 要记录的错误消息内容。
+//   - v: 可选参数，用于格式化错误消息内容。
+func BambooError(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Error(ctx, stringBuild(&stringBuilder, function, message, v))
+	g.Log().Error(ctx, stringBuild(&stringBuilder, function, format, v))
+}
+
+// BambooNotice 记录通知级别的日志消息。
+//
+// 参数:
+//   - ctx: 上下文对象，传递请求级别的信息
+//   - function: 功能名，用于标识日志来源
+//   - format: 消息格式字符串
+//   - v: 格式化内容的参数列表
+func BambooNotice(ctx context.Context, function string, format string, v ...interface{}) {
+	var stringBuilder strings.Builder
+	stringBuilder.WriteString(bconsts.CONTROLLER)
+	g.Log().Notice(ctx, stringBuild(&stringBuilder, function, format, v))
 }
 
 // BambooPanic 输出工具相关的严重错误日志并触发panic。
@@ -58,9 +74,10 @@ func BambooError(ctx context.Context, function string, message string, v ...inte
 // 参数:
 //   - ctx: 上下文对象，用于日志记录。
 //   - function: 功能名，用于标识日志来源。
-//   - message: 要记录的严重错误消息内容。
-func BambooPanic(ctx context.Context, function string, message string, v ...interface{}) {
+//   - format: 要记录的严重错误消息内容。
+//   - v: 可选参数，用于格式化严重错误消息内容。
+func BambooPanic(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.CONTROLLER)
-	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, message, v))
+	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, format, v))
 }

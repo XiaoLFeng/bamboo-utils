@@ -30,5 +30,5 @@ type ResponseDTO[E interface{}] struct {
 	Message  string `json:"message" dc:"消息返回"`
 	Time     int64  `json:"time" dc:"时间"`
 	Overhead *int64 `json:"overhead,omitempty" dc:"耗时"`
-	Data     E      `json:"data,omitempty" dc:"数据返回"`
+	Data     *E     `json:"data,omitempty" dc:"数据返回"`
 }
