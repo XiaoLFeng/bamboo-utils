@@ -28,7 +28,7 @@ func stringBuild(stringBuilder *strings.Builder, function string, message string
 	stringBuilder.WriteString("<")
 	stringBuilder.WriteString(function)
 	stringBuilder.WriteString("> ")
-	if v != nil || len(v) > 0 {
+	if len(v) > 0 {
 		stringBuilder.WriteString(fmt.Sprintf(message, v...))
 	} else {
 		stringBuilder.WriteString(message)
