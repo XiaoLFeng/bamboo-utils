@@ -28,6 +28,10 @@ func stringBuild(stringBuilder *strings.Builder, function string, message string
 	stringBuilder.WriteString("<")
 	stringBuilder.WriteString(function)
 	stringBuilder.WriteString("> ")
-	stringBuilder.WriteString(fmt.Sprintf(message, v...))
+	if v != nil {
+		stringBuilder.WriteString(fmt.Sprintf(message, v...))
+	} else {
+		stringBuilder.WriteString(message)
+	}
 	return fmt.Sprintf(stringBuilder.String())
 }
