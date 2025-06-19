@@ -27,7 +27,7 @@ import (
 func BambooInfo(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.BAMBOO)
-	g.Log().Info(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Info(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // BambooDebug 输出工具相关的调试日志。
@@ -40,7 +40,7 @@ func BambooInfo(ctx context.Context, function string, format string, v ...interf
 func BambooDebug(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.BAMBOO)
-	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // BambooError 输出工具相关的错误日志。
@@ -53,7 +53,7 @@ func BambooDebug(ctx context.Context, function string, format string, v ...inter
 func BambooError(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.BAMBOO)
-	g.Log().Error(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Error(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // BambooNotice 记录通知级别的日志消息。
@@ -66,7 +66,7 @@ func BambooError(ctx context.Context, function string, format string, v ...inter
 func BambooNotice(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.BAMBOO)
-	g.Log().Notice(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Notice(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // BambooPanic 输出工具相关的严重错误日志并触发panic。
@@ -79,5 +79,5 @@ func BambooNotice(ctx context.Context, function string, format string, v ...inte
 func BambooPanic(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.BAMBOO)
-	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, format, v...))
 }

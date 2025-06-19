@@ -27,7 +27,7 @@ import (
 func HandlerInfo(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.HANDLER)
-	g.Log().Info(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Info(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // HandlerDebug 输出工具相关的调试日志。
@@ -40,7 +40,7 @@ func HandlerInfo(ctx context.Context, function string, format string, v ...inter
 func HandlerDebug(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.HANDLER)
-	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Debug(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // HandlerError 输出工具相关的错误日志。
@@ -53,7 +53,7 @@ func HandlerDebug(ctx context.Context, function string, format string, v ...inte
 func HandlerError(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.HANDLER)
-	g.Log().Error(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Error(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // HandlerNotice 记录通知级别的日志消息。
@@ -66,7 +66,7 @@ func HandlerError(ctx context.Context, function string, format string, v ...inte
 func HandlerNotice(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.HANDLER)
-	g.Log().Notice(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Notice(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
 
 // HandlerPanic 输出工具相关的严重错误日志并触发panic。
@@ -79,5 +79,5 @@ func HandlerNotice(ctx context.Context, function string, format string, v ...int
 func HandlerPanic(ctx context.Context, function string, format string, v ...interface{}) {
 	var stringBuilder strings.Builder
 	stringBuilder.WriteString(bconsts.HANDLER)
-	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, format, v))
+	g.Log().Panic(ctx, stringBuild(&stringBuilder, function, format, v...))
 }
