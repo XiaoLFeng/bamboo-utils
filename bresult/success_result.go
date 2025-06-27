@@ -21,8 +21,8 @@ import (
 //
 // 返回:
 //   - 包含状态码、描述信息及数据的通用响应结构体。
-func SuccessHasData[T interface{}](ctx context.Context, message string, data *T) *bmodels.ResponseDTO[*T] {
-	returnResult := bmodels.ResponseDTO[*T]{
+func SuccessHasData[T interface{}](ctx context.Context, message string, data T) *bmodels.ResponseDTO[T] {
+	returnResult := &bmodels.ResponseDTO[T]{
 		Context: gctx.CtxId(ctx),
 		Code:    200,
 		Data:    &data,
@@ -33,7 +33,7 @@ func SuccessHasData[T interface{}](ctx context.Context, message string, data *T)
 		request := ghttp.RequestFromCtx(ctx)
 		returnResult.Overhead = butil.Ptr(gtime.Now().Sub(request.EnterTime).Milliseconds())
 	}
-	return &returnResult
+	return returnResult
 }
 
 // Success 创建一个成功的响应对象。
@@ -44,8 +44,8 @@ func SuccessHasData[T interface{}](ctx context.Context, message string, data *T)
 //
 // 返回:
 //   - dto.ResponseDTO[*types.Nil]: 包含状态码 200 和消息的响应对象。
-func Success(ctx context.Context, message string) *bmodels.ResponseDTO[*types.Nil] {
-	returnResult := bmodels.ResponseDTO[*types.Nil]{
+func Success(ctx context.Context, message string) *bmodels.ResponseDTO[types.Nil] {
+	returnResult := &bmodels.ResponseDTO[types.Nil]{
 		Context: gctx.CtxId(ctx),
 		Code:    200,
 		Time:    gtime.TimestampMilli(),
@@ -55,5 +55,5 @@ func Success(ctx context.Context, message string) *bmodels.ResponseDTO[*types.Ni
 		request := ghttp.RequestFromCtx(ctx)
 		returnResult.Overhead = butil.Ptr(gtime.Now().Sub(request.EnterTime).Milliseconds())
 	}
-	return &returnResult
+	return returnResult
 }
